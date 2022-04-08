@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,33 +8,60 @@ namespace AddressBookProblems
 {
     internal class AddressBookMain
     {
-       private List<Contacts> contactList;
+      
+        private List<Contacts> contactList;
+        private List<Contacts> cityList;
+        private List<Contacts> stateList;
+       
         public AddressBookMain()
         {
             this.contactList = new List<Contacts>();
         }
-      
-        public void AddContactDetails(string firstName, string lastName, string address, string city, string state, long zipCode, long phoneNumber, string email)
+       
+        public void AddContactDetails(string firstName, string lastName, string address, string city, string state, long zipCode, long phoneNumber, string email, Dictionary<string, List<Contacts>> stateDictionary, Dictionary<string, List<Contacts>> cityDictionary)
         {
 
-            
+         
             Contacts contact = this.contactList.Find(x => x.firstName.Equals(firstName));
-          
+         
             if (contact == null)
             {
                 Contacts contactDetails = new Contacts(firstName, lastName, address, city, state, zipCode, phoneNumber, email);
                 this.contactList.Add(contactDetails);
+                if (!cityDictionary.ContainsKey(city))
+                {
+
+                    cityList = new List<Contacts>();
+                    cityList.Add(contactDetails);
+                    cityDictionary.Add(city, cityList);
+                }
+                else
+                {
+                    List<Contacts> cities = cityDictionary[city];
+                    cities.Add(contactDetails);
+                }
+                if (!stateDictionary.ContainsKey(state))
+                {
+
+                    stateList = new List<Contacts>();
+                    stateList.Add(contactDetails);
+                    stateDictionary.Add(state, stateList);
+                }
+                else
+                {
+                    List<Contacts> states = stateDictionary[state];
+                    states.Add(contactDetails);
+                }
             }
-          
             else
             {
                 Console.WriteLine("Person, {0} is already exist in the address book", firstName);
             }
         }
-        
+       
         public void DisplayContact()
         {
-           
+          
             if (this.contactList.Count != 0)
             {
                 foreach (Contacts data in this.contactList)
@@ -46,10 +72,10 @@ namespace AddressBookProblems
             else
                 Console.WriteLine("No Contacts in AddressBook \n");
         }
-        
+       
         public void EditContact(string name)
         {
-          
+           
             foreach (Contacts data in this.contactList)
             {
                 if (data.firstName.Equals(name))
@@ -103,7 +129,7 @@ namespace AddressBookProblems
                     Console.WriteLine("No Contact With this Name! \n");
             }
         }
-       
+      
         public void DeleteContact(string dName)
         {
             foreach (Contacts ct in this.contactList)
@@ -116,7 +142,7 @@ namespace AddressBookProblems
                 }
             }
         }
-       
+        
         public static void DisplayPerson(Dictionary<string, AddressBookMain> addressDictionary)
         {
             List<Contacts> list = null;
@@ -136,12 +162,26 @@ namespace AddressBookProblems
                 Console.WriteLine("No person present in the address book with same city or state name");
             }
         }
-        
+       
         public static void DisplayList(List<Contacts> list)
         {
             foreach (var data in list)
             {
                 data.Display();
+            }
+        }
+       
+        public static void PrintList(Dictionary<string, List<Contacts>> dictionary)
+        {
+            foreach (var data in dictionary)
+            {
+                Console.WriteLine("Details of person in {0}", data.Key);
+                foreach (var person in data.Value)
+                {
+                    Console.WriteLine("{0} {1} {2} {3} {4} {5} {6}", person.firstName, person.lastName, person.address,
+                                                                   person.city, person.state, person.zipCode, person.phoneNumber, person.email);
+                }
+                Console.WriteLine();
             }
         }
     }
