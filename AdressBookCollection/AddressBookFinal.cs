@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,25 +9,24 @@ namespace AddressBookProblems
 {
     internal class AddressBookMain
     {
-       
-        private List<Contacts> contactList;
-       
+       private List<Contacts> contactList;
         public AddressBookMain()
         {
             this.contactList = new List<Contacts>();
         }
-       
+      
         public void AddContactDetails(string firstName, string lastName, string address, string city, string state, long zipCode, long phoneNumber, string email)
         {
 
+            
             Contacts contact = this.contactList.Find(x => x.firstName.Equals(firstName));
-           
+          
             if (contact == null)
             {
                 Contacts contactDetails = new Contacts(firstName, lastName, address, city, state, zipCode, phoneNumber, email);
                 this.contactList.Add(contactDetails);
             }
-           
+          
             else
             {
                 Console.WriteLine("Person, {0} is already exist in the address book", firstName);
@@ -35,7 +35,7 @@ namespace AddressBookProblems
         
         public void DisplayContact()
         {
-            
+           
             if (this.contactList.Count != 0)
             {
                 foreach (Contacts data in this.contactList)
@@ -46,10 +46,10 @@ namespace AddressBookProblems
             else
                 Console.WriteLine("No Contacts in AddressBook \n");
         }
-       
+        
         public void EditContact(string name)
         {
-           
+          
             foreach (Contacts data in this.contactList)
             {
                 if (data.firstName.Equals(name))
@@ -106,14 +106,42 @@ namespace AddressBookProblems
        
         public void DeleteContact(string dName)
         {
-            foreach (Contacts item in this.contactList)
+            foreach (Contacts ct in this.contactList)
             {
-                if (item.firstName.Equals(dName))
+                if (ct.firstName.Equals(dName))
                 {
-                    this.contactList.Remove(item);
+                    this.contactList.Remove(ct);
                     Console.WriteLine("Contact Deleted! \n");
                     break;
                 }
+            }
+        }
+       
+        public static void DisplayPerson(Dictionary<string, AddressBookMain> addressDictionary)
+        {
+            List<Contacts> list = null;
+            Console.WriteLine("Enter City or State name");
+            string name = Console.ReadLine();
+            foreach (var data in addressDictionary)
+            {
+                AddressBookMain address = data.Value;
+                list = address.contactList.FindAll(x => x.city.Equals(name) || x.state.Equals(name));
+                if (list.Count > 0)
+                {
+                    DisplayList(list);
+                }
+            }
+            if (list == null)
+            {
+                Console.WriteLine("No person present in the address book with same city or state name");
+            }
+        }
+        
+        public static void DisplayList(List<Contacts> list)
+        {
+            foreach (var data in list)
+            {
+                data.Display();
             }
         }
     }

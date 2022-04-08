@@ -10,12 +10,12 @@ namespace AddressBookProblems
     {
         static AddressBookMain addressBookMain = new AddressBookMain();
         static Dictionary<string, AddressBookMain> addressBook = new Dictionary<string, AddressBookMain>();
-       
+        //created List of class Type.
         public void ReadInput()
         {
             bool CONTINUE = true;
 
-          
+            
             while (CONTINUE)
             {
                 Console.WriteLine("Enter your choice:");
@@ -26,6 +26,7 @@ namespace AddressBookProblems
                 Console.WriteLine("5.Delete Person");
                 Console.WriteLine("6.Add Multiple Address Book");
                 Console.WriteLine("7.Delete Any Address Book");
+                Console.WriteLine("8.Display person by city or state name");
                 Console.WriteLine("0.Exit");
                 int choice = Convert.ToInt32(Console.ReadLine());
                 switch (choice)
@@ -60,6 +61,9 @@ namespace AddressBookProblems
                         string addressBookName = Console.ReadLine();
                         addressBook.Remove(addressBookName);
                         break;
+                    case 8:
+                        AddressBookMain.DisplayPerson(addressBook);
+                        break;
                     case 0:
                         CONTINUE = false;
                         break;
@@ -68,7 +72,7 @@ namespace AddressBookProblems
                 }
             }
         }
-        
+      
         public static void AddBook()
         {
             Console.WriteLine("Enter address book name:");
@@ -97,7 +101,7 @@ namespace AddressBookProblems
 
             addressMain.AddContactDetails(firstName, lastName, address, city, state, zipCode, phoneNumber, email);
         }
-        
+       
         public void AddMultipleAddressBook()
         {
             Console.WriteLine("How many AddressBook,you want to Add");
@@ -108,7 +112,7 @@ namespace AddressBookProblems
             }
             Console.WriteLine("All Address Book Added successfully! \n");
         }
-       
+        
         public static AddressBookMain BookName(Dictionary<string, AddressBookMain> addBook)
         {
             addressBook = addBook;
