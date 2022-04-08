@@ -8,11 +8,10 @@ namespace AddressBookProblems
 {
     internal class AddressBookMain
     {
-      
         private List<Contacts> contactList;
         private List<Contacts> cityList;
         private List<Contacts> stateList;
-       
+        
         public AddressBookMain()
         {
             this.contactList = new List<Contacts>();
@@ -21,9 +20,9 @@ namespace AddressBookProblems
         public void AddContactDetails(string firstName, string lastName, string address, string city, string state, long zipCode, long phoneNumber, string email, Dictionary<string, List<Contacts>> stateDictionary, Dictionary<string, List<Contacts>> cityDictionary)
         {
 
-         
+           
             Contacts contact = this.contactList.Find(x => x.firstName.Equals(firstName));
-         
+           
             if (contact == null)
             {
                 Contacts contactDetails = new Contacts(firstName, lastName, address, city, state, zipCode, phoneNumber, email);
@@ -53,6 +52,7 @@ namespace AddressBookProblems
                     states.Add(contactDetails);
                 }
             }
+          
             else
             {
                 Console.WriteLine("Person, {0} is already exist in the address book", firstName);
@@ -61,7 +61,6 @@ namespace AddressBookProblems
        
         public void DisplayContact()
         {
-          
             if (this.contactList.Count != 0)
             {
                 foreach (Contacts data in this.contactList)
@@ -129,7 +128,7 @@ namespace AddressBookProblems
                     Console.WriteLine("No Contact With this Name! \n");
             }
         }
-      
+       
         public void DeleteContact(string dName)
         {
             foreach (Contacts ct in this.contactList)
@@ -142,7 +141,7 @@ namespace AddressBookProblems
                 }
             }
         }
-        
+      
         public static void DisplayPerson(Dictionary<string, AddressBookMain> addressDictionary)
         {
             List<Contacts> list = null;
@@ -181,7 +180,15 @@ namespace AddressBookProblems
                     Console.WriteLine("{0} {1} {2} {3} {4} {5} {6}", person.firstName, person.lastName, person.address,
                                                                    person.city, person.state, person.zipCode, person.phoneNumber, person.email);
                 }
-                Console.WriteLine();
+                Console.WriteLine("-----------------------------");
+            }
+        }
+      
+        public static void CountPerson(Dictionary<string, List<Contacts>> dictionary)
+        {
+            foreach (var person in dictionary)
+            {
+                Console.WriteLine("Number of person {0}:", person.Value.Count);
             }
         }
     }

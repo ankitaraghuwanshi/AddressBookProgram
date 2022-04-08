@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,7 +17,6 @@ namespace AddressBookProblems
         {
             bool CONTINUE = true;
 
-           
             while (CONTINUE)
             {
                 Console.WriteLine("Enter your choice:");
@@ -31,6 +29,7 @@ namespace AddressBookProblems
                 Console.WriteLine("7.Delete Any Address Book");
                 Console.WriteLine("8.Display person by city or state name");
                 Console.WriteLine("9.View person by city or state");
+                Console.WriteLine("10.Count person by city or state");
                 Console.WriteLine("0.Exit");
                 int choice = Convert.ToInt32(Console.ReadLine());
                 switch (choice)
@@ -72,6 +71,12 @@ namespace AddressBookProblems
                         AddressBookMain.PrintList(cityDictionary);
                         AddressBookMain.PrintList(stateDictionary);
                         break;
+                    case 10:
+                        Console.WriteLine("City");
+                        AddressBookMain.CountPerson(cityDictionary);
+                        Console.WriteLine("State");
+                        AddressBookMain.CountPerson(stateDictionary);
+                        break;
                     case 0:
                         CONTINUE = false;
                         break;
@@ -80,14 +85,14 @@ namespace AddressBookProblems
                 }
             }
         }
-        
+       
         public static void AddBook()
         {
             Console.WriteLine("Enter address book name:");
             string addBookName = Console.ReadLine();
             addressBook.Add(addBookName, addressBookMain);
         }
-       
+        
         public static void AddDetails(AddressBookMain addressMain, Dictionary<string, List<Contacts>> cityDictionary, Dictionary<string, List<Contacts>> stateDictionary)
         {
             Console.WriteLine("Enter first Name");
@@ -120,7 +125,7 @@ namespace AddressBookProblems
             }
             Console.WriteLine("All Address Book Added successfully! \n");
         }
-       
+      
         public static AddressBookMain BookName(Dictionary<string, AddressBookMain> addBook)
         {
             addressBook = addBook;
