@@ -4,39 +4,38 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdressBookImplementation
+namespace AddressBookProblems
 {
     internal class AddressBookMain
     {
-        //Collection Class
+       
         private List<Contacts> contactList;
-        //Constructor.
+       
         public AddressBookMain()
         {
             this.contactList = new List<Contacts>();
         }
-        //Method to Add Contact
+       
         public void AddContactDetails(string firstName, string lastName, string address, string city, string state, long zipCode, long phoneNumber, string email)
         {
 
-            // finding the data that already has the same first name
             Contacts contact = this.contactList.Find(x => x.firstName.Equals(firstName));
-            // if same name is not present then add into address book
+           
             if (contact == null)
             {
                 Contacts contactDetails = new Contacts(firstName, lastName, address, city, state, zipCode, phoneNumber, email);
                 this.contactList.Add(contactDetails);
             }
-            // print person already exists in the address book
+           
             else
             {
                 Console.WriteLine("Person, {0} is already exist in the address book", firstName);
             }
         }
-        //Display Contact
+        
         public void DisplayContact()
         {
-            //cheks if ContactList is empty or not.
+            
             if (this.contactList.Count != 0)
             {
                 foreach (Contacts data in this.contactList)
@@ -47,10 +46,10 @@ namespace AdressBookImplementation
             else
                 Console.WriteLine("No Contacts in AddressBook \n");
         }
-        //Method to Edit Contact 
+       
         public void EditContact(string name)
         {
-            // checks for every object whether the name is equal the given name
+           
             foreach (Contacts data in this.contactList)
             {
                 if (data.firstName.Equals(name))
@@ -69,7 +68,7 @@ namespace AdressBookImplementation
                     {
                         case 1:
                             data.lastName = Console.ReadLine();
-                            Console.WriteLine("Data updated successfully");
+                            Console.WriteLine("Data updated successfully \n");
                             break;
                         case 2:
                             data.address = Console.ReadLine();
@@ -104,14 +103,14 @@ namespace AdressBookImplementation
                     Console.WriteLine("No Contact With this Name! \n");
             }
         }
-        //Method to Delete a Person
+       
         public void DeleteContact(string dName)
         {
-            foreach (Contacts ct in this.contactList)
+            foreach (Contacts item in this.contactList)
             {
-                if (ct.firstName.Equals(dName))
+                if (item.firstName.Equals(dName))
                 {
-                    this.contactList.Remove(ct);
+                    this.contactList.Remove(item);
                     Console.WriteLine("Contact Deleted! \n");
                     break;
                 }

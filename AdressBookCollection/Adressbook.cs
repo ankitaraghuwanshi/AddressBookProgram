@@ -4,18 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdressBookImplementation
+namespace AddressBookProblems
 {
     internal class CreateAddressBook
     {
         static AddressBookMain addressBookMain = new AddressBookMain();
         static Dictionary<string, AddressBookMain> addressBook = new Dictionary<string, AddressBookMain>();
-        //created List of class Type.
+       
         public void ReadInput()
         {
             bool CONTINUE = true;
 
-            //the loop continues until the user exit from program.
+          
             while (CONTINUE)
             {
                 Console.WriteLine("Enter your choice:");
@@ -68,17 +68,14 @@ namespace AdressBookImplementation
                 }
             }
         }
-        //Method to create a AddressBook in Dictionary
+        
         public static void AddBook()
         {
             Console.WriteLine("Enter address book name:");
             string addBookName = Console.ReadLine();
             addressBook.Add(addBookName, addressBookMain);
         }
-        /// <summary>
-        /// This method is used to add a new contact.
-        /// </summary>
-        /// <param name="addressBookMain"></param>
+       
         public static void AddDetails(AddressBookMain addressMain)
         {
             Console.WriteLine("Enter first Name");
@@ -100,7 +97,7 @@ namespace AdressBookImplementation
 
             addressMain.AddContactDetails(firstName, lastName, address, city, state, zipCode, phoneNumber, email);
         }
-        //Method to Add Multiple Contact
+        
         public void AddMultipleAddressBook()
         {
             Console.WriteLine("How many AddressBook,you want to Add");
@@ -111,7 +108,7 @@ namespace AdressBookImplementation
             }
             Console.WriteLine("All Address Book Added successfully! \n");
         }
-        
+       
         public static AddressBookMain BookName(Dictionary<string, AddressBookMain> addBook)
         {
             addressBook = addBook;
