@@ -180,7 +180,7 @@ namespace AddressBookProblems
                     Console.WriteLine("{0} {1} {2} {3} {4} {5} {6}", person.firstName, person.lastName, person.address,
                                                                    person.city, person.state, person.zipCode, person.phoneNumber, person.email);
                 }
-                Console.WriteLine("-----------------------------");
+                Console.WriteLine("");
             }
         }
       
