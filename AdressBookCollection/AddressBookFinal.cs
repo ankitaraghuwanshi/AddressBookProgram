@@ -191,5 +191,36 @@ namespace AddressBookProblems
                 Console.WriteLine("Number of person {0}:", person.Value.Count);
             }
         }
+        public static void SortDataByCityStateOrZip(Dictionary<string, List<Contacts>> dictionary)
+        {
+            List<Contacts> list = new List<Contacts>();//storing in list
+            foreach (var data in dictionary)
+            {
+                foreach (var item in data.Value)
+                {
+                    list.Add(item);
+                }
+            }
+
+            Console.WriteLine("\n list of city");
+            foreach (var item in list.OrderBy(detail => detail.city))
+            {
+                item.Display();
+            }
+            
+            Console.WriteLine("\n list of states");
+            foreach (var item in list.OrderBy(detail => detail.state))
+            {
+                item.Display();
+            }
+            
+            Console.WriteLine("\n list of Zipcodes");
+            foreach (var item in list.OrderBy(detail => detail.zipCode))
+            {
+                item.Display();
+            }
+
+
+        }
     }
 }
