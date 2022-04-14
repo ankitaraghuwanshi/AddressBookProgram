@@ -1,15 +1,20 @@
-﻿using System;
+﻿using CsvHelper;
+using CsvHelper.Configuration;
+using System.Globalization;
+using System.IO;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CsvHelper;
 
 namespace AddressBookUsingCollection
 {
     class AddressBookCollection
     {
-        public Dictionary<string, AddressBook> addressBookDictionary;//Dictionary collection
+        public Dictionary<string, AddressBook> addressBookDictionary;
         public Dictionary<string, List<Person>> cityDictionary;
         public Dictionary<string, List<Person>> stateDictionary;
 
@@ -87,7 +92,54 @@ namespace AddressBookUsingCollection
                         writer.WriteLine($"Zip : {person.zip}");
                         writer.WriteLine($"PhoneNumber : {person.phoneNumber}");
                         writer.WriteLine($"Email : {person.email}");
-                       
+
+                    }
+                }
+            }
+        }
+
+        public void WriteAddressBookCollectionToCSVFiles()
+        {
+            string folderPath = @"D:\VS\AdressBookCollection\AddressBookProgram\csvFiles";
+            CsvConfiguration configuration = new CsvConfiguration(CultureInfo.InvariantCulture)
+            {
+                IncludePrivateMembers = true,
+            };
+            foreach (var AddressBookItem in addressBookDictionary)
+            {
+                string filePath = folderPath + AddressBookItem.Key + ".csv";
+                using (StreamWriter writer = new StreamWriter(filePath))
+                using (var csvExport = new CsvWriter(writer, configuration))
+                {
+                    csvExport.WriteHeader<Person>();
+                    csvExport.NextRecord();
+                    foreach (Person person in AddressBookItem.Value.addressBook)
+                    {
+                        csvExport.WriteField($"{person.firstName}");
+                        csvExport.WriteField($"{person.lastName}");
+                        csvExport.WriteField($"{person.address}");
+                        csvExport.WriteField($"{person.city}");
+                        csvExport.WriteField($"{person.state}");
+                        csvExport.WriteField($"{person.zip}");
+                        csvExport.WriteField($"{person.phoneNumber}");
+                        csvExport.WriteField($"{person.email}");
+                        csvExport.NextRecord();
+                    }
+                }
+            }
+        }
+        public void ReadAddressBookCollectionFromCSVFiles()
+        {
+            string filePath = @"D:\VS\AdressBookCollection\AddressBookProgram\csvFiles";
+            string[] filePaths = Directory.GetFiles(filePath, "*.csv");
+            foreach (var presentFiles in filePaths)
+            {
+                using (StreamReader streamReader = File.OpenText(presentFiles))
+                {
+                    string lines = "";
+                    while ((lines = streamReader.ReadLine()) != null)
+                    {
+                        Console.WriteLine(lines);
                     }
                 }
             }

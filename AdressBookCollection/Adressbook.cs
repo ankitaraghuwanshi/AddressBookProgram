@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -149,7 +150,5 @@ namespace AddressBookUsingCollection
         {
             addressBook.Sort((x, y) => x.zip.CompareTo(y.zip));
         }
-
-
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 
 namespace AddressBookUsingCollection
 {
@@ -30,6 +31,8 @@ namespace AddressBookUsingCollection
                 Console.WriteLine("11) sort by city state and zip");
                 Console.WriteLine("12) read file");
                 Console.WriteLine("13) write file");
+                Console.WriteLine("14) WriteAddressBookCollectionToCSVFiles");
+                Console.WriteLine("15) ReadAddressBookCollectionToCSVFiles");
                 Console.WriteLine("0) Exit");
                 choice = Convert.ToInt32(Console.ReadLine());
                 switch (choice)
@@ -101,6 +104,12 @@ namespace AddressBookUsingCollection
                         break;
                     case 13:
                         addressBookCollection.WriteAddressBookCollectionToFiles();
+                        break;
+                    case 14:
+                        addressBookCollection.WriteAddressBookCollectionToCSVFiles();
+                        break;
+                    case 15:
+                        addressBookCollection.ReadAddressBookCollectionFromCSVFiles();
                         break;
                     case 0:
                         Console.WriteLine("Exit");
