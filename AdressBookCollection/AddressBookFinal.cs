@@ -1,7 +1,4 @@
-﻿using CsvHelper;
-using CsvHelper.Configuration;
-using System.Globalization;
-using System.IO;
+﻿using System.IO;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,6 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CsvHelper;
+using Newtonsoft.Json;
+using CsvHelper.Configuration;
+using System.Globalization;
 
 namespace AddressBookUsingCollection
 {
@@ -143,6 +143,27 @@ namespace AddressBookUsingCollection
                     }
                 }
             }
+        }
+        public void WriteAddressBookCollectionFromJsonFiles()
+        {
+            string folderPath = @"D:\VS\AdressBookCollection\AddressBookProgram\jsonfiles";
+            foreach (var AddressBookItem in addressBookDictionary)
+            {
+                string filePath = folderPath + AddressBookItem.Key + ".json";
+                JsonSerializer serializer = new JsonSerializer();
+                using (StreamWriter writer = new StreamWriter(filePath))
+                using (JsonWriter jsonWriter = new JsonTextWriter(writer))
+                {
+                    serializer.Serialize(writer, AddressBookItem.Value.addressBook);
+                }
+            }
+        }
+        public void ReadAddressBookCollectionFromJsonFiles()
+        {
+            string folderPath = @"D:\VS\AdressBookCollection\AddressBookProgram\jsonfiles\person.json";
+            string result = File.ReadAllText(folderPath);
+            List<Person> contactDetails = JsonConvert.DeserializeObject<List<Person>>(result);
+            Console.WriteLine("Successfully read records from the file" + contactDetails);
         }
     }
 }

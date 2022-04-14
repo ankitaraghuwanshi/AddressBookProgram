@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 
 namespace AddressBookUsingCollection
 {
@@ -7,7 +6,6 @@ namespace AddressBookUsingCollection
     {
         static void Main(string[] args)
         {
-
             Console.WriteLine("Welcome to Address Book!");
             Console.WriteLine("Enter Address Book Name");
             string addressBookName = Console.ReadLine();
@@ -33,7 +31,10 @@ namespace AddressBookUsingCollection
                 Console.WriteLine("13) write file");
                 Console.WriteLine("14) WriteAddressBookCollectionToCSVFiles");
                 Console.WriteLine("15) ReadAddressBookCollectionToCSVFiles");
+                Console.WriteLine("16) WriteAddressBookCollectionToJsonFiles");
+                Console.WriteLine("17) ReadAddressBookCollectionToJsonFiles");
                 Console.WriteLine("0) Exit");
+
                 choice = Convert.ToInt32(Console.ReadLine());
                 switch (choice)
                 {
@@ -110,6 +111,12 @@ namespace AddressBookUsingCollection
                         break;
                     case 15:
                         addressBookCollection.ReadAddressBookCollectionFromCSVFiles();
+                        break;
+                    case 16:
+                        addressBookCollection.WriteAddressBookCollectionFromJsonFiles();
+                        break;
+                    case 17:
+                        addressBookCollection.ReadAddressBookCollectionFromJsonFiles();
                         break;
                     case 0:
                         Console.WriteLine("Exit");
