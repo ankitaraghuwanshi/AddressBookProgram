@@ -17,22 +17,20 @@ namespace AddressBookUsingCollection
             do
             {
                 Console.WriteLine("Enter Choice:");
-                Console.WriteLine("1 to Display All Contact");
-                Console.WriteLine("2 to Add new Contact");
-                Console.WriteLine("3 to Edit Contact");
-                Console.WriteLine("4 to Delete Contact");
-                Console.WriteLine("5 to Add New Address Book");
-                Console.WriteLine("6 to List of all Address Book");
-                Console.WriteLine("7 to Search Person in City or State");
-                Console.WriteLine("8 to View Person by City or State");
-                Console.WriteLine("9 to Count Contact by city or state");
-                Console.WriteLine("10 to Contact sort by Person Name");
-                Console.WriteLine("11 to sort by city state and zip");
-                Console.WriteLine("12 to read file");
-                Console.WriteLine("13 to write file");
-                Console.WriteLine("14 to WriteAddressBookCollectionToCSVFiles");
-                Console.WriteLine("15 to ReadAddressBookCollectionToCSVFiles");
-                Console.WriteLine("0 to Exit");
+                Console.WriteLine("1) Display All Contact");
+                Console.WriteLine("2) Add new Contact");
+                Console.WriteLine("3) Edit Contact");
+                Console.WriteLine("4) Delete Contact");
+                Console.WriteLine("5) Add New Address Book");
+                Console.WriteLine("6) List of all Address Book");
+                Console.WriteLine("7) Search Person in City or State");
+                Console.WriteLine("8) View Person by City or State");
+                Console.WriteLine("9) Count Contact by city or state");
+                Console.WriteLine("10) Contact sort by Person Name");
+                Console.WriteLine("11) sort by city state and zip");
+                Console.WriteLine("12) read file");
+                Console.WriteLine("13) write file");
+                Console.WriteLine("0) Exit");
                 choice = Convert.ToInt32(Console.ReadLine());
                 switch (choice)
                 {
@@ -103,12 +101,6 @@ namespace AddressBookUsingCollection
                         break;
                     case 13:
                         addressBookCollection.WriteAddressBookCollectionToFiles();
-                        break;
-                    case 14:
-                        addressBookCollection.WriteAddressBookCollectionToCSVFiles();
-                        break;
-                    case 15:
-                        addressBookCollection.ReadAddressBookCollectionFromCSVFiles();
                         break;
                     case 0:
                         Console.WriteLine("Exit");

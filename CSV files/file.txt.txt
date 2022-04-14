@@ -1,3 +1,0 @@
-firstname,lastname,address,city,state,zipcode
-ankita,raghu,tade,indore,mp,452018
-kajol,jain,soni,jabalpur,up,454545
